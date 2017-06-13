@@ -1,0 +1,108 @@
+*.font: xft:Monaco Font:pixelsize=14
+
+Xft.dpi:                        96
+Xft.antialias:                  1
+Xft.autohint:                   1
+Xft.hinting:                    1
+Xft.hintstyle:                  hintslight
+Xft.lcdfilter:                  lcdlight
+Xft.rgba:                       rgb
+
+URxvt*termName:                 rxvt
+URxvt.depth:                    64
+URxvt*lineSpace:                1
+URxvt.letterSpace:              -3
+URxvt.iso14755:                 false
+URxvt.iso14755_52:              false
+URxvt*geometry:                 65x17
+URxvt.scrollBar:                false
+URxvt*loginShell:               true
+URxvt.internalBorder:           5
+URxvt.perl-ext:	 		default,matcher
+URxvt.matcher.button: 			1
+
+
+*.foreground:   #ffeefc
+*.background:   #404552
+*.cursorColor:  #c16772
+
+! black
+*.color0:       #4f4858
+*.color8:       #545d67
+
+! red
+*.color1:       #c05c47
+*.color9:       #c16772
+
+! green
+*.color2:       #428e8e
+*.color10:      #afda6e
+
+! yellow
+*.color3:       #e4b226
+*.color11:      #ebcf1a
+
+! blue
+*.color4:       #4457a3
+*.color12:      #4880a5
+
+! magenta
+*.color5:       #903a62
+*.color13:      #9568a1
+
+! cyan
+*.color6:       #7aa1dc
+*.color14:      #abbcda
+
+! white
+*.color7:       #c4b7c5
+*.color15:      #ffeefc
+
+
+! Layout
+!rofi.width:                          50
+!rofi.lines:                          15
+!rofi.columns:                        1
+!rofi.color-enabled:                  true
+!rofi.color-normal:                   #282828,#ebdbb2,#353535,#458588,#ebdbb2
+!rofi.color-urgent:                   #282828,#d79921,#353535,#d79921,#282828
+!rofi.color-active:                   #282828,#ebdbb2,#353535,#458588,#ebdbb2
+!rofi.color-window:                   #282828,#404552
+
+
+rofi.width:                          50
+rofi.lines:                          15
+rofi.columns:                        1
+rofi.color-enabled: 				 true
+!rofi.color-window: 				  #002b37, #002b37, #003642
+rofi.color-window: 					 #404552, #404552, #404552
+!rofi.color-normal:					  #002b37, #819396, #002b37, #003642, #819396
+rofi.color-normal:					 #404552, #7e869a, #404552, #5a6172, #819396
+rofi.color-active:					 #002b37, #008ed4, #002b37, #003642, #008ed4
+rofi.color-urgent:					 #002b37, #da4281, #002b37, #003642, #da4281
+
+! Behaviour
+rofi.terminal:                       urxvt
+rofi.levenshtein-sort:               true
+rofi.fuzzy:                          true
+rofi.kb-cancel:                      Escape,Control+c
+
+from __future__ import (absolute_import, division, print_function)
+
+from ranger.colorschemes.default import Default
+from ranger.gui.color import yellow, red, blue
+
+
+class Scheme(Default):
+    progress_bar_color = red
+
+    def use(self, context):
+        fg, bg, attr = Default.use(self, context)
+
+        if context.directory and not context.marked and not context.link \
+                and not context.inactive_pane:
+            fg = red
+
+        if context.in_titlebar and context.hostname:
+            fg = yellow if context.bad else blue
+
